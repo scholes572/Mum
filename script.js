@@ -195,8 +195,10 @@ document.addEventListener("click", (e) => {
 function initPetals() {
   const wrap = document.querySelector(".petals");
   if (!wrap || REDUCED) return;
+  const isMobile = window.matchMedia("(max-width: 640px)").matches;
   const P = ["🌸", "🌷", "✿", "❀", "🌼", "⭐"];
-  for (let i = 0; i < 16; i++) {
+  const count = isMobile ? 6 : 16;
+  for (let i = 0; i < count; i++) {
     const p = el("span", "petal", P[i % P.length]);
     p.style.setProperty("--x", `${Math.random() * 100}vw`);
     p.style.setProperty("--s", `${11 + Math.random() * 12}px`);
@@ -229,12 +231,14 @@ function initCursor() {
 function buildStars() {
   const wrap = document.getElementById("stars");
   if (!wrap) return;
-  for (let i = 0; i < 90; i++) {
+  const isMobile = window.matchMedia("(max-width: 640px)").matches;
+  const count = isMobile ? 30 : 90;
+  for (let i = 0; i < count; i++) {
     const s = el("span", "star");
     const size = 1 + Math.random() * 2.2;
     s.style.cssText = `left:${Math.random() * 100}%;top:${Math.random() * 100}%;width:${size}px;height:${size}px;`;
     wrap.appendChild(s);
-    if (HAS_GSAP && !REDUCED) {
+    if (HAS_GSAP && !REDUCED && !isMobile) {
       gsap.to(s, { opacity: 0.15, duration: 1 + Math.random() * 2.5, repeat: -1, yoyo: true, ease: "sine.inOut", delay: Math.random() * 3 });
     }
   }
