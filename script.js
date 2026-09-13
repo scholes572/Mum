@@ -7,7 +7,6 @@
 document.documentElement.classList.add("no-anim");
 
 const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const HAS_GSAP = typeof window.gsap !== "undefined";
 
 /* ── Photo data ────────────────────────────────────────────── */
 const PHOTOS = [
@@ -167,7 +166,7 @@ lightbox.addEventListener("touchend", (e) => {
 const CONFETTI = ["🎉", "✨", "🎊", "💖", "🌸", "⭐"];
 
 function burst(x, y, count = 14, set = CONFETTI) {
-  if (!HAS_GSAP || REDUCED) return;
+  if (typeof window.gsap === "undefined" || REDUCED) return;
   for (let i = 0; i < count; i++) {
     const s = el("span");
     s.textContent = set[i % set.length];
@@ -238,7 +237,7 @@ function buildStars() {
     const size = 1 + Math.random() * 2.2;
     s.style.cssText = `left:${Math.random() * 100}%;top:${Math.random() * 100}%;width:${size}px;height:${size}px;`;
     wrap.appendChild(s);
-    if (HAS_GSAP && !REDUCED && !isMobile) {
+    if (typeof window.gsap !== "undefined" && !REDUCED && !isMobile) {
       gsap.to(s, { opacity: 0.15, duration: 1 + Math.random() * 2.5, repeat: -1, yoyo: true, ease: "sine.inOut", delay: Math.random() * 3 });
     }
   }
@@ -256,7 +255,7 @@ function initCake() {
     if (!lit) return;
     lit = false;
 
-    if (HAS_GSAP && !REDUCED) {
+    if (typeof window.gsap !== "undefined" && !REDUCED) {
       /* flames: flicker hard, then stretch out and vanish */
       gsap.to(".flame-wrap", {
         scaleY: 2.4, scaleX: 0.5, opacity: 0, transformOrigin: "50% 100%",
@@ -621,22 +620,46 @@ document.addEventListener("DOMContentLoaded", () => {
   buildStars();
   initPetals();
 
-  if (HAS_GSAP && !REDUCED) {
-    const intro = initMotion();
-    ScrollTrigger.refresh();
-    runPreloader(intro);
-    initCursor();
-    initCake();
-  } else {
-    const pre = document.getElementById("preloader");
-    if (pre) pre.style.display = "none";
-    document.documentElement.classList.add("no-anim");
-    if (REDUCED) {
-      const piles = document.getElementById("gallery-piles");
-      const stripWrap = document.getElementById("strip-wrap");
-      if (piles) piles.style.display = "none";
-      if (stripWrap) stripWrap.style.display = "none";
+  /* Wait for GSAP to load (it's loaded async from CDN) */
+  const tryInitAnimations = () => {
+    const HAS_GSAP = typeof window.gsap !== "undefined";
+    
+    if (HAS_GSAP && !REDUCED) {
+      const intro = initMotion();
+      ScrollTrigger.refresh();
+      runPreloader(intro);
+      initCursor();
+      initCake();
+    } else {
+      const pre = document.getElementById("preloader");
+      if (pre) pre.style.display = "none";
+      document.documentElement.classList.add("no-anim");
+      if (REDUCED) {
+        const piles = document.getElementById("gallery-piles");
+        const stripWrap = document.getElementById("strip-wrap");
+        if (piles) piles.style.display = "none";
+        if (stripWrap) stripWrap.style.display = "none";
+      }
+      initCake();
     }
-    initCake();
+  };
+
+  /* If GSAP isn't loaded yet, wait for it */
+  if (typeof window.gsap === "undefined") {
+    let checkCount = 0;
+    const checkGsap = setInterval(() => {
+      checkCount++;
+      if (typeof window.gsap !== "undefined") {
+        clearInterval(checkGsap);
+        tryInitAnimations();
+      } else if (checkCount > 100) {
+        /* Give up after 10 seconds */
+        clearInterval(checkGsap);
+        tryInitAnimations();
+      }
+    }, 100);
+  } else {
+    /* GSAP already loaded */
+    tryInitAnimations();
   }
 });
