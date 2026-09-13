@@ -446,7 +446,7 @@ function buildStars() {
 
     if (HAS_GSAP && !REDUCED) {
 
-      gsap.to(s, { opacity: 0.15, duration: isMobile ? (1.6 + Math.random() * 2.2) : (1 + Math.random() * 2.5), repeat: -1, yoyo: true, ease: "sine.inOut", delay: Math.random() * 3 });
+      gsap.to(s, { opacity: 0.15, duration: 1 + Math.random() * 2.5, repeat: -1, yoyo: true, ease: "sine.inOut", delay: Math.random() * 3 });
 
     }
 
