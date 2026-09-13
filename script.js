@@ -295,11 +295,12 @@ function initMotion() {
   document.documentElement.classList.remove("no-anim");
 
   const isMobile = window.matchMedia("(max-width: 640px)").matches;
+  const isTablet = window.matchMedia("(min-width: 641px) and (max-width: 1024px)").matches;
   const fly = isMobile ? 60 : 110;          /* fly-in distances */
   const magRange = isMobile ? 90 : 160;     /* magnet scatter range */
 
-  /* Lenis smooth scroll wired into GSAP (touch keeps native momentum) */
-  if (typeof window.Lenis !== "undefined" && !REDUCED) {
+  /* Lenis smooth scroll wired into GSAP (disable on mobile to prevent conflicts) */
+  if (typeof window.Lenis !== "undefined" && !REDUCED && !isMobile) {
     const lenis = new window.Lenis({ duration: 1.15, smoothWheel: true, syncTouch: false });
     window.__lenis = lenis;
     lenis.on("scroll", ScrollTrigger.update);
@@ -313,6 +314,21 @@ function initMotion() {
         lenis.scrollTo(t, { offset: 0, duration: 1.6 });
       });
     });
+  } else if (!isMobile) {
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      a.addEventListener("click", (e) => {
+        const t = document.querySelector(a.getAttribute("href"));
+        if (!t) return;
+        e.preventDefault();
+        gsap.to(window, { scrollTo: { y: t, offsetY: 0 }, duration: 1.2, ease: "power2.inOut" });
+      });
+    });
+  }
+
+  /* Mobile optimization: reduce animation complexity */
+  ScrollTrigger.config({ autoRefreshEvents: "visibilitychange,DOMContentLoaded,load,orientationchange", ignoreMobileResize: true });
+  if (isMobile) {
+    ScrollTrigger.normalizeScroll(true);
   }
 
   /* ── Scene A · mega opening intro ────────────────────────── */
@@ -350,17 +366,19 @@ function initMotion() {
   });
 
   /* ── Marquees: infinite ribbons ──────────────────────────── */
+  /* On mobile, reduce animation performance impact */
   document.querySelectorAll(".marquee").forEach((m, i) => {
     const half = m.scrollWidth / 2;
     const dir = i % 2 === 0 ? -1 : 1;
+    const duration = isMobile ? 28 : 22;
     gsap.to(m, {
-      x: dir * half, duration: 22, ease: "none", repeat: -1,
+      x: dir * half, duration: duration, ease: "none", repeat: -1,
       modifiers: { x: (x) => (parseFloat(x) % half) + "px" }
     });
     /* band sweeps in */
     gsap.fromTo(m.closest(".marquee-band"), { xPercent: dir * 6, opacity: 0 }, {
       xPercent: 0, opacity: 1, duration: 1,
-      scrollTrigger: { trigger: m.closest(".marquee-band"), start: "top 90%" }
+      scrollTrigger: { trigger: m.closest(".marquee-band"), start: "top 90%", markers: false }
     });
   });
 
@@ -368,7 +386,7 @@ function initMotion() {
   gsap.utils.toArray(".flow-para").forEach((p) => {
     gsap.fromTo(p, { opacity: 0, y: 44 }, {
       opacity: 1, y: 0, duration: 1, ease: "power3.out",
-      scrollTrigger: { trigger: p, start: "top 84%" }
+      scrollTrigger: { trigger: p, start: "top 84%", markers: false }
     });
   });
 
@@ -376,53 +394,54 @@ function initMotion() {
   gsap.utils.toArray(".kept-line").forEach((p) => {
     gsap.fromTo(p, { opacity: 0, y: 30 }, {
       opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
-      scrollTrigger: { trigger: p, start: "top 85%" }
+      scrollTrigger: { trigger: p, start: "top 85%", markers: false }
     });
   });
   const keptWords = document.querySelectorAll(".kept-mega span");
   gsap.set(keptWords, { yPercent: 60, opacity: 0, scale: 0.8, rotation: () => gsap.utils.random(-8, 8) });
   gsap.to(keptWords, {
-    yPercent: 0, opacity: 1, scale: 1, rotation: 0, duration: 1.1, stagger: 0.12, ease: "back.out(1.7)",
-    scrollTrigger: { trigger: ".kept-mega", start: "top 78%" }
+    yPercent: 0, opacity: 1, scale: 1, rotation: 0, duration: 1.1, stagger: isMobile ? 0.08 : 0.12, ease: "back.out(1.7)",
+    scrollTrigger: { trigger: ".kept-mega", start: "top 78%", markers: false }
   });
 
   /* ── Scene E · duo notes fly in from sides ───────────────── */
   gsap.fromTo(".duo-note.left", { x: -fly, opacity: 0, rotation: -5 }, {
     x: 0, opacity: 1, rotation: -1.1, duration: 1.2, ease: "power3.out",
-    scrollTrigger: { trigger: ".scene-duo", start: "top 78%" }
+    scrollTrigger: { trigger: ".scene-duo", start: "top 78%", markers: false }
   });
   gsap.fromTo(".duo-note.right", { x: fly, opacity: 0, rotation: 5 }, {
     x: 0, opacity: 1, rotation: 1, duration: 1.2, ease: "power3.out",
-    scrollTrigger: { trigger: ".scene-duo", start: "top 78%" }
+    scrollTrigger: { trigger: ".scene-duo", start: "top 78%", markers: false }
   });
 
   /* ── Scene F · gifts rows slide with numbers ─────────────── */
   gsap.utils.toArray(".gift-row").forEach((row, i) => {
     gsap.fromTo(row, { opacity: 0, x: i % 2 ? 70 : -70 }, {
       opacity: 1, x: 0, duration: 1, ease: "power3.out",
-      scrollTrigger: { trigger: row, start: "top 84%" }
+      scrollTrigger: { trigger: row, start: "top 84%", markers: false }
     });
     gsap.fromTo(row.querySelector(".gift-num"), { scale: 0.4, opacity: 0 }, {
       scale: 1, opacity: 1, duration: 0.9, ease: "back.out(2)", delay: 0.25,
-      scrollTrigger: { trigger: row, start: "top 84%" }
+      scrollTrigger: { trigger: row, start: "top 84%", markers: false }
     });
   });
   gsap.fromTo(".gifts-em", { opacity: 0, scale: 0.9 }, {
     opacity: 1, scale: 1, duration: 1, ease: "power3.out",
-    scrollTrigger: { trigger: ".gifts-em", start: "top 86%" }
+    scrollTrigger: { trigger: ".gifts-em", start: "top 86%", markers: false }
   });
 
   /* ── Scene H · word garden pops in ───────────────────────── */
   gsap.utils.toArray(".garden-word").forEach((w, i) => {
+    const stagger = isMobile ? 0.04 : 0.08;
     gsap.fromTo(w, { opacity: 0, scale: 0.3, rotation: () => gsap.utils.random(-20, 20) }, {
-      opacity: 1, scale: 1, rotation: 0, duration: 0.9, ease: "back.out(2.2)", delay: i * 0.08,
-      scrollTrigger: { trigger: ".word-garden", start: "top 80%" }
+      opacity: 1, scale: 1, rotation: 0, duration: 0.9, ease: "back.out(2.2)", delay: i * stagger,
+      scrollTrigger: { trigger: ".word-garden", start: "top 80%", markers: false }
     });
   });
   gsap.utils.toArray([".lessons-note", ".lessons-em"]).forEach((n) => {
     gsap.fromTo(n, { opacity: 0, y: 26 }, {
       opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
-      scrollTrigger: { trigger: n, start: "top 86%" }
+      scrollTrigger: { trigger: n, start: "top 86%", markers: false }
     });
   });
 
@@ -430,102 +449,107 @@ function initMotion() {
   gsap.set(".cake-wish", { opacity: 0, y: 24 });
   gsap.fromTo(".cake-stage", { opacity: 0, y: 80, scale: 0.92 }, {
     opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "power3.out",
-    scrollTrigger: { trigger: ".scene-cake", start: "top 66%" }
+    scrollTrigger: { trigger: ".scene-cake", start: "top 66%", markers: false }
   });
   gsap.fromTo([".cake-title", ".scene-cake .scene-kicker"], { opacity: 0, y: 30 }, {
     opacity: 1, y: 0, duration: 0.9, stagger: 0.15, ease: "power3.out",
-    scrollTrigger: { trigger: ".scene-cake", start: "top 74%" }
+    scrollTrigger: { trigger: ".scene-cake", start: "top 74%", markers: false }
   });
 
   /* ── Scene J · gallery ───────────────────────────────────── */
   gsap.utils.toArray("#gallery-piles .pile").forEach((pile) => {
     gsap.fromTo(pile, { opacity: 0, y: 60, rotation: -3 }, {
       opacity: 1, y: 0, rotation: 0, duration: 1, ease: "power3.out",
-      scrollTrigger: { trigger: pile, start: "top 88%" }
+      scrollTrigger: { trigger: pile, start: "top 88%", markers: false }
     });
-    const cards = pile.querySelectorAll(".polaroid");
-    if (cards[2]) gsap.to(cards[2], {
-      x: 46, y: -26, rotation: 9, ease: "none",
-      scrollTrigger: { trigger: pile, start: "top 80%", end: "top 30%", scrub: true }
-    });
-    if (cards[1]) gsap.to(cards[1], {
-      x: -30, y: -12, rotation: -7, ease: "none",
-      scrollTrigger: { trigger: pile, start: "top 80%", end: "top 30%", scrub: true }
-    });
+    /* Disable scrub animations on mobile for better performance */
+    if (!isMobile) {
+      const cards = pile.querySelectorAll(".polaroid");
+      if (cards[2]) gsap.to(cards[2], {
+        x: 46, y: -26, rotation: 9, ease: "none",
+        scrollTrigger: { trigger: pile, start: "top 80%", end: "top 30%", scrub: true, markers: false }
+      });
+      if (cards[1]) gsap.to(cards[1], {
+        x: -30, y: -12, rotation: -7, ease: "none",
+        scrollTrigger: { trigger: pile, start: "top 80%", end: "top 30%", scrub: true, markers: false }
+      });
+    }
   });
 
   /* Pinned horizontal strip — desktop only.
      On phones/tablets the strip is a native swipe scroller (CSS scroll-snap). */
   const strip = document.getElementById("strip");
   const stripWrap = document.getElementById("strip-wrap");
-  if (strip && stripWrap) {
-    const mm = gsap.matchMedia();
-    mm.add("(min-width: 901px) and (prefers-reduced-motion: no-preference)", () => {
-      const getDistance = () => Math.max(0, strip.scrollWidth - window.innerWidth + 40);
-      gsap.to(strip, {
-        x: () => -getDistance(), ease: "none",
-        scrollTrigger: {
-          trigger: stripWrap, start: "top top", end: () => `+=${getDistance()}`,
-          pin: true, scrub: 1, anticipatePin: 1, invalidateOnRefresh: true
-        }
-      });
-      gsap.fromTo(".strip .card", { scale: 0.92 }, {
-        scale: 1, stagger: 0.06, ease: "none",
-        scrollTrigger: { trigger: stripWrap, start: "top bottom", end: "top top", scrub: true }
-      });
+  if (strip && stripWrap && !isMobile && !isTablet) {
+    const getDistance = () => Math.max(0, strip.scrollWidth - window.innerWidth + 40);
+    gsap.to(strip, {
+      x: () => -getDistance(), ease: "none",
+      scrollTrigger: {
+        trigger: stripWrap, start: "top top", end: () => `+=${getDistance()}`,
+        pin: true, scrub: 1, anticipatePin: 1, invalidateOnRefresh: true, markers: false
+      }
+    });
+    gsap.fromTo(".strip .card", { scale: 0.92 }, {
+      scale: 1, stagger: 0.06, ease: "none",
+      scrollTrigger: { trigger: stripWrap, start: "top bottom", end: "top top", scrub: true, markers: false }
     });
   }
 
   gsap.utils.toArray("#gallery-grid .polaroid").forEach((fig) => {
     gsap.fromTo(fig, { opacity: 0, y: 40 }, {
       opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
-      scrollTrigger: { trigger: fig, start: "top 90%" }
+      scrollTrigger: { trigger: fig, start: "top 90%", markers: false }
     });
   });
 
   /* ── Scene K · magnet words snap to place ────────────────── */
   gsap.utils.toArray(".magnet-words span").forEach((w, i) => {
+    const stagger = isMobile ? 0.06 : 0.12;
     gsap.fromTo(w, {
       opacity: 0, x: () => gsap.utils.random(-magRange, magRange), y: () => gsap.utils.random(-50, 50), rotation: () => gsap.utils.random(-24, 24)
     }, {
-      opacity: 1, x: 0, y: 0, rotation: 0, duration: 1.1, ease: "elastic.out(1, 0.6)", delay: i * 0.12,
-      scrollTrigger: { trigger: ".magnet-words", start: "top 82%" }
+      opacity: 1, x: 0, y: 0, rotation: 0, duration: 1.1, ease: "elastic.out(1, 0.6)", delay: i * stagger,
+      scrollTrigger: { trigger: ".magnet-words", start: "top 82%", markers: false }
     });
   });
   gsap.utils.toArray([".unsaid-line", ".unsaid-em"], ).forEach((n) => {
     gsap.fromTo(n, { opacity: 0, y: 26 }, {
       opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
-      scrollTrigger: { trigger: n, start: "top 86%" }
+      scrollTrigger: { trigger: n, start: "top 86%", markers: false }
     });
   });
 
   /* ── Scene L · prayer: lines bloom, moon drifts ──────────── */
   gsap.utils.toArray(".prayer-line").forEach((line, i) => {
+    const stagger = isMobile ? 0.06 : 0.1;
     gsap.fromTo(line, { opacity: 0, y: 26 }, {
-      opacity: 1, y: 0, duration: 1, ease: "power2.out", delay: i * 0.1,
-      scrollTrigger: { trigger: ".prayer-inner", start: "top 70%" }
+      opacity: 1, y: 0, duration: 1, ease: "power2.out", delay: i * stagger,
+      scrollTrigger: { trigger: ".prayer-inner", start: "top 70%", markers: false }
     });
   });
   gsap.fromTo([".prayer-title", ".scene-prayer .scene-kicker", ".prayer-final"], { opacity: 0, y: 30 }, {
     opacity: 1, y: 0, duration: 1, stagger: 0.15, ease: "power3.out",
-    scrollTrigger: { trigger: ".prayer-inner", start: "top 74%" }
+    scrollTrigger: { trigger: ".prayer-inner", start: "top 74%", markers: false }
   });
-  gsap.to(".moon", { y: -18, duration: 4, yoyo: true, repeat: -1, ease: "sine.inOut" });
+  /* Moon animation disabled on mobile to save resources */
+  if (!isMobile) {
+    gsap.to(".moon", { y: -18, duration: 4, yoyo: true, repeat: -1, ease: "sine.inOut" });
+  }
 
   /* ── Scene M · the letter ────────────────────────────────── */
   gsap.utils.toArray(".scene-letter .letter-line, .scene-letter .salutation").forEach((n) => {
     gsap.fromTo(n, { opacity: 0, y: 30 }, {
       opacity: 1, y: 0, duration: 0.95, ease: "power3.out",
-      scrollTrigger: { trigger: n, start: "top 86%" }
+      scrollTrigger: { trigger: n, start: "top 86%", markers: false }
     });
   });
   gsap.fromTo(".thanks-list li", { opacity: 0, x: -30 }, {
-    opacity: 1, x: 0, duration: 0.8, stagger: 0.12, ease: "power3.out",
-    scrollTrigger: { trigger: ".thanks-list", start: "top 84%" }
+    opacity: 1, x: 0, duration: 0.8, stagger: isMobile ? 0.08 : 0.12, ease: "power3.out",
+    scrollTrigger: { trigger: ".thanks-list", start: "top 84%", markers: false }
   });
   gsap.fromTo(".quote", { opacity: 0, scale: 0.92 }, {
     opacity: 1, scale: 1, duration: 1.1, ease: "power3.out",
-    scrollTrigger: { trigger: ".quote", start: "top 80%" }
+    scrollTrigger: { trigger: ".quote", start: "top 80%", markers: false }
   });
 
   /* final love: big scale-in + hearts */
@@ -533,7 +557,7 @@ function initMotion() {
   gsap.to(".final-love", {
     opacity: 1, scale: 1, duration: 1.2, ease: "elastic.out(1, 0.5)",
     scrollTrigger: {
-      trigger: ".final-love", start: "top 80%", once: true,
+      trigger: ".final-love", start: "top 80%", once: true, markers: false,
       onEnter: () => {
         const r = document.querySelector(".final-love").getBoundingClientRect();
         burst(r.left + r.width / 2, r.top + r.height / 2, 16, ["💖", "💗", "🌹", "✨"]);
@@ -542,14 +566,23 @@ function initMotion() {
   });
   gsap.fromTo([".final-birthday", ".signature", ".back-top"], { opacity: 0, y: 26 }, {
     opacity: 1, y: 0, duration: 0.9, stagger: 0.15, ease: "power3.out",
-    scrollTrigger: { trigger: ".final-birthday", start: "top 84%" }
+    scrollTrigger: { trigger: ".final-birthday", start: "top 84%", markers: false }
   });
 
   /* refresh measurements — load, image loads, rotation, viewport changes */
-  window.addEventListener("load", () => ScrollTrigger.refresh());
-  window.addEventListener("orientationchange", () => setTimeout(() => ScrollTrigger.refresh(), 350));
+  window.addEventListener("load", () => {
+    setTimeout(() => ScrollTrigger.refresh(), 100);
+  });
+  window.addEventListener("orientationchange", () => {
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+      ScrollTrigger.getAll().forEach(t => t.refresh());
+    }, 500);
+  });
   if (window.visualViewport) {
-    window.visualViewport.addEventListener("resize", () => ScrollTrigger.refresh());
+    window.visualViewport.addEventListener("resize", () => {
+      ScrollTrigger.refresh();
+    });
   }
   document.querySelectorAll("#strip img, #gallery-grid img, #gallery-piles img").forEach((img) => {
     if (!img.complete) img.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
