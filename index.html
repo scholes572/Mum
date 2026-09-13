@@ -1,242 +1,431 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>For You, Mum  Happy Birthday, Edinah</title>
+
   <meta name="description" content="A birthday letter in web form — for Mum, with love from her son." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Pacifico&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="style.css" />
+
 </head>
+
 <body>
 
-  <!-- Ambient layers -->
+*<!-- Ambient layers -->*
+
   <div class="petals" aria-hidden="true"></div>
+
   <div class="cursor" aria-hidden="true"><span class="cursor-dot"></span><span class="cursor-ring"></span></div>
+
   <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progress-bar"></div></div>
 
-  <!-- ═══ Preloader ══════════════════════════════════════════ -->
+*<!-- ═══ Preloader ══════════════════════════════════════════ -->*
+
   <div class="preloader" id="preloader" aria-hidden="true">
+
     <div class="preloader-inner">
+
       <p class="preloader-kicker">For you, on your day</p>
+
       <p class="preloader-word" aria-label="Edinah">
+
         <span class="preloader-letter">E</span><span class="preloader-letter">d</span><span class="preloader-letter">i</span><span class="preloader-letter">n</span><span class="preloader-letter">a</span><span class="preloader-letter">h</span>
+
       </p>
+
       <p class="preloader-sub">a letter is being prepared…</p>
+
       <div class="preloader-line"><span id="preloader-fill"></span></div>
+
     </div>
+
     <div class="preloader-panel top"></div>
+
     <div class="preloader-panel bottom"></div>
+
   </div>
 
   <main id="journey">
 
-    <!-- ═══ SCENE A · MEGA OPENING ═════════════════════════════ -->
+*<!-- ═══ SCENE A · MEGA OPENING ═════════════════════════════ -->*
+
     <div class="scene scene-open" id="open">
+
       <div class="balloon b1" aria-hidden="true">🎈</div>
+
       <div class="balloon b2" aria-hidden="true">🎈</div>
+
       <div class="balloon b3" aria-hidden="true">🎈</div>
 
       <p class="eyebrow">12 September · A day made for you</p>
+
       <h1 class="mega">
+
         <span class="mega-line"><span class="mega-word">HAPPY</span></span>
+
         <span class="mega-line"><span class="mega-word accent">BIRTHDAY</span></span>
+
         <span class="mega-line"><span class="mega-word script">Mum</span></span>
+
       </h1>
+
       <p class="open-sub">Today  and every day  is about you.</p>
 
       <div class="name-plate">
+
         <span class="name">Edinah</span>
+
         <span class="dates">12 September 1983</span>
+
         <span class="plate-flower">✿</span>
+
       </div>
+
       <p class="whisper">There are some things I don't always say, but today, nataka nikuambie.</p>
 
       <a href="#marquee-1" class="scroll-hint" aria-label="Scroll to begin">
+
         <span class="scroll-line"></span>
+
         <span class="scroll-label">begin</span>
+
       </a>
+
     </div>
 
-    <!-- ═══ SCENE B · RIBBON MARQUEE ═══════════════════════════ -->
+*<!-- ═══ SCENE B · RIBBON MARQUEE ═══════════════════════════ -->*
+
     <div class="marquee-band rose" id="marquee-1" aria-hidden="true">
+
       <div class="marquee"><span>with love&nbsp;·&nbsp;with love&nbsp;·&nbsp;with love&nbsp;·&nbsp;with love&nbsp;·&nbsp;with love&nbsp;·&nbsp;</span><span>with love&nbsp;·&nbsp;with love&nbsp;·&nbsp;with love&nbsp;·&nbsp;with love&nbsp;·&nbsp;with love&nbsp;·&nbsp;</span></div>
+
     </div>
 
-    <!-- ═══ SCENE C · CARRYING (flowing text) ══════════════════ -->
+*<!-- ═══ SCENE C · CARRYING (flowing text) ══════════════════ -->*
+
     <div class="scene scene-flow" id="carry">
+
       <p class="scene-kicker">when I think about you</p>
+
       <p class="flow-para">the first thing that comes to my mind is <em>how much you have carried</em> without making a big thing out of it.</p>
+
       <p class="flow-para">You've always preferred a quiet and private life. You don't need everyone to know what you're going through na hiyo kitu inanifurahisha sana.</p>
+
       <p class="flow-para big">But I've seen how hard you work for our family.</p>
+
       <p class="flow-para">I've seen you keep going through the good days and the difficult ones. And somehow, even after everything, you still haven't given up.</p>
+
       <p class="flow-para accent">I don't know if I tell you this enough, but I notice it. And I appreciate it. Natakanga kukuambia sana but leo nimekuambia</p>
+
     </div>
 
-    <!-- ═══ SCENE D · "YOU JUST KEPT GOING" ════════════════════ -->
+*<!-- ═══ SCENE D · "YOU JUST KEPT GOING" ════════════════════ -->*
+
     <div class="scene scene-kept" id="kept">
+
       <p class="kept-line">Mum, I know life hasn't always been easy for you.</p>
+
       <p class="kept-line">There have been ups and downs, moments that tested you in ways I may never fully understand.</p>
+
       <h2 class="kept-mega"><span>you</span> <span>just</span> <span class="accent">kept</span> <span>going.</span></h2>
+
       <p class="kept-line">You didn't need everything to be perfect before you could keep moving. You simply did what you knew you had to do for your family and I really admire that.</p>
+
       <p class="kept-line accent">And somehow, through everything, you still managed to bring us up well </p>
+
     </div>
 
-    <!-- ═══ SCENE E · HONESTY + CHINA (two voices) ═════════════ -->
+*<!-- ═══ SCENE E · HONESTY + CHINA (two voices) ═════════════ -->*
+
     <div class="scene scene-duo" id="honest">
+
       <div class="duo-note left">
+
         <p class="scene-kicker rose">I know I haven't always made it easy</p>
+
         <p>There have been times when I've failed you, made mistakes, or made you wonder if I would ever become the person you hoped.</p>
+
         <p>But you never stopped believing in me. Even when I didn't get things right, you didn't walk away. Kwanza vile nilikuanga mdogo, nilikuanga kichwa ngumu sana. But look at me now, niko so changed just because of you</p>
+
         <p class="duo-em">Hujai acha kuni support.</p>
+
       </div>
+
       <div class="duo-note right china">
+
         <p class="flag">🇨🇳</p>
+
         <p class="scene-kicker gold">you gave me another chance</p>
+
         <p>When I think about how I ended up in China, I don't just think about school.</p>
+
         <p class="duo-em">I think about you.</p>
+
         <p>You could have looked at my past mistakes and decided I wasn't worth another chance. But you didn't.</p>
+
         <p>I hope one day I can show you that your belief in me wasn't misplaced. Nitafanya kazi kwa bidii</p>
+
       </div>
+
     </div>
 
-    <!-- ═══ SCENE F · YOUR GIFTS (counted) ═════════════════════ -->
+*<!-- ═══ SCENE F · YOUR GIFTS (counted) ═════════════════════ -->*
+
     <div class="scene scene-gifts" id="gifts">
+
       <p class="scene-kicker">you gave me more than I realized</p>
+
       <div class="gift-rows">
+
         <div class="gift-row"><span class="gift-num">01</span><p>Having someone there. Having someone make sure I was okay. Unakumbuka vile nilikuanga na gonjeka sana nikiwa mdogo, I know at some point I almost died because of the sicknesses I had....Nilikua nimeshinda nikilazwa hospitali na mimi nashukuru hujai give up na health yangu...adi nashukuru vile ulini buyia glasses and now macho yangu iko swa....Just because you were there for me, health yangu iko swa. You made us drink herbs through out our life in Nairobi to ensure our health iko sawa</p></div>
+
         <div class="gift-row"><span class="gift-num">02</span><p>But as I grow older, I understand those things weren't simply things that happened.</p></div>
+
         <div class="gift-row"><span class="gift-num">03</span><p>They were your time. They were your sacrifices. They were pieces of your life that you gave to me.</p></div>
+
       </div>
+
       <p class="gifts-em">And Mum, I am grateful.</p>
+
     </div>
 
-    <!-- ═══ SCENE G · MARQUEE 2 ════════════════════════════════ -->
+*<!-- ═══ SCENE G · MARQUEE 2 ════════════════════════════════ -->*
+
     <div class="marquee-band gold" id="marquee-2" aria-hidden="true">
+
       <div class="marquee"><span>your lessons live in me&nbsp;·&nbsp;your lessons live in me&nbsp;·&nbsp;your lessons live in me&nbsp;·&nbsp;</span><span>your lessons live in me&nbsp;·&nbsp;your lessons live in me&nbsp;·&nbsp;your lessons live in me&nbsp;·&nbsp;</span></div>
+
     </div>
 
-    <!-- ═══ SCENE H · LESSONS (word garden) ════════════════════ -->
+*<!-- ═══ SCENE H · LESSONS (word garden) ════════════════════ -->*
+
     <div class="scene scene-lessons" id="lessons">
+
       <p class="scene-kicker">a lot of who I am came from you</p>
+
       <div class="word-garden">
+
         <span class="garden-word big">kind</span>
+
         <span class="garden-word">humble</span>
+
         <span class="garden-word">grateful</span>
+
         <span class="garden-word big">patient</span>
+
         <span class="garden-word">gentle</span>
+
         <span class="garden-word big">thankful</span>
+
       </div>
+
       <p class="lessons-note">To treat people the way I would want to be treated. Not to rush everything, but to take my time with the things I do. To appreciate what I have instead of always wishing for something else.</p>
+
       <p class="lessons-em">I may not remember every conversation, but those lessons have become part of me.</p>
+
     </div>
 
-    <!-- ═══ SCENE I · CAKE SCENE ═══════════════════════════════ -->
+*<!-- ═══ SCENE I · CAKE SCENE ═══════════════════════════════ -->*
+
     <div class="scene scene-cake" id="cake">
+
       <p class="scene-kicker light">a small wish, before the photos</p>
+
       <h2 class="cake-title">make a wish, Mum</h2>
 
       <div class="cake-stage">
+
         <div class="cake" id="cake-svg" role="button" tabindex="0" aria-label="Blow out the candles">
+
           <svg viewBox="0 0 340 330" width="340" height="330" aria-hidden="true">
-            <!-- plate -->
+
+*<!-- plate -->*
+
             <ellipse cx="170" cy="312" rx="150" ry="14" fill="#e8c9c2"/>
-            <!-- bottom tier -->
+
+*<!-- bottom tier -->*
+
             <rect x="55" y="225" width="230" height="80" rx="14" fill="#f6d8a8"/>
+
             <rect x="55" y="225" width="230" height="22" rx="11" fill="#fdf1dc"/>
+
             <path d="M55 236 q14 18 28 0 q14 18 28 0 q14 18 28 0 q14 18 28 0 q14 18 28 0 q14 18 28 0 q14 18 28 0 q14 18 28 0 v-11 h-230 z" fill="#fdf1dc"/>
+
             <circle cx="100" cy="270" r="5" fill="#c98a8a"/><circle cx="140" cy="284" r="5" fill="#b9975b"/>
+
             <circle cx="180" cy="266" r="5" fill="#c98a8a"/><circle cx="220" cy="284" r="5" fill="#b9975b"/>
+
             <circle cx="255" cy="268" r="5" fill="#c98a8a"/>
-            <!-- middle tier -->
+
+*<!-- middle tier -->*
+
             <rect x="85" y="150" width="170" height="70" rx="13" fill="#e89da4"/>
+
             <rect x="85" y="150" width="170" height="20" rx="10" fill="#fbe4e0"/>
+
             <path d="M85 160 q12 16 24 0 q12 16 24 0 q12 16 24 0 q12 16 24 0 q12 16 24 0 q12 16 24 0 q12 16 26 0 v-10 h-170 z" fill="#fbe4e0"/>
+
             <circle cx="120" cy="190" r="4.5" fill="#fffdf9"/><circle cx="160" cy="200" r="4.5" fill="#b9975b"/>
+
             <circle cx="205" cy="192" r="4.5" fill="#fffdf9"/><circle cx="238" cy="198" r="4.5" fill="#b9975b"/>
-            <!-- top tier -->
+
+*<!-- top tier -->*
+
             <rect x="115" y="90" width="110" height="56" rx="12" fill="#b9975b"/>
+
             <rect x="115" y="90" width="110" height="17" rx="8" fill="#f0dcb4"/>
+
             <path d="M115 99 q10 14 20 0 q10 14 20 0 q10 14 20 0 q10 14 20 0 q10 14 20 0 q10 14 20 0 v-9 h-110 z" fill="#f0dcb4"/>
-            <!-- candles -->
+
+*<!-- candles -->*
+
             <g id="candles">
+
               <g class="candle"><rect x="128" y="46" width="9" height="46" rx="4" fill="#fdf1dc"/><line x1="132.5" y1="30" x2="132.5" y2="46" stroke="#7a675c" stroke-width="1.4"/></g>
+
               <g class="candle"><rect x="165" y="38" width="9" height="54" rx="4" fill="#c98a8a"/><line x1="169.5" y1="22" x2="169.5" y2="38" stroke="#7a675c" stroke-width="1.4"/></g>
+
               <g class="candle"><rect x="202" y="46" width="9" height="46" rx="4" fill="#9ec3b8"/><line x1="206.5" y1="30" x2="206.5" y2="46" stroke="#7a675c" stroke-width="1.4"/></g>
+
             </g>
-            <!-- flames -->
+
+*<!-- flames -->*
+
             <g id="flames">
+
               <g class="flame-wrap"><ellipse class="flame" cx="132.5" cy="22" rx="7" ry="12" fill="#f7b733"/><ellipse class="flame-core" cx="132.5" cy="24" rx="3.2" ry="6" fill="#fdebd2"/></g>
+
               <g class="flame-wrap"><ellipse class="flame" cx="169.5" cy="14" rx="7" ry="12" fill="#f7b733"/><ellipse class="flame-core" cx="169.5" cy="16" rx="3.2" ry="6" fill="#fdebd2"/></g>
+
               <g class="flame-wrap"><ellipse class="flame" cx="206.5" cy="22" rx="7" ry="12" fill="#f7b733"/><ellipse class="flame-core" cx="206.5" cy="24" rx="3.2" ry="6" fill="#fdebd2"/></g>
+
             </g>
-            <!-- smoke (hidden until blown) -->
+
+*<!-- smoke (hidden until blown) -->*
+
             <g id="smoke" opacity="0">
+
               <circle class="smoke-p" cx="132.5" cy="16" r="4" fill="#b9a89b"/>
+
               <circle class="smoke-p" cx="169.5" cy="8" r="4" fill="#b9a89b"/>
+
               <circle class="smoke-p" cx="206.5" cy="16" r="4" fill="#b9a89b"/>
+
             </g>
+
           </svg>
+
         </div>
+
       </div>
 
       <p class="cake-wish" id="cake-wish">If I could give you one thing today, it wouldn't be a material gift. It would be the chance to see everything you've worked so hard for — to see me become successful, to sit back one day and know your sacrifices weren't for nothing. And more than anything, I'd ask God to give you enough years to see that day.</p>
+
     </div>
 
-    <!-- ═══ SCENE J · GALLERY (pinned strip + piles + grid) ════ -->
+*<!-- ═══ SCENE J · GALLERY (pinned strip + piles + grid) ════ -->*
+
     <div class="scene scene-gallery" id="moments">
+
       <p class="scene-kicker">chapter nine</p>
+
       <h2 class="gallery-title">The Little Moments</h2>
+
       <p class="gallery-sub">Some moments don't need a long explanation. They just need to be remembered.</p>
 
       <div id="gallery-piles"></div>
 
       <div id="gallery-grid"></div>
+
     </div>
 
-    <!-- ═══ SCENE K · UNSAID (magnet words) ════════════════════ -->
+*<!-- ═══ SCENE K · UNSAID (magnet words) ════════════════════ -->*
+
     <div class="scene scene-unsaid" id="unsaid">
+
       <p class="scene-kicker rose">things I don't say enough</p>
+
       <p class="unsaid-line">Mum, I don't always know how to say these things.</p>
+
       <div class="magnet-words">
+
         <span>proud</span><span>I like the person you are</span><span>I admire how you keep going</span><span>I admire how much you care</span>
+
       </div>
+
       <p class="unsaid-em">And I'm grateful that out of all the people in this world, I got to have you as my mum.</p>
+
     </div>
 
-    <!-- ═══ SCENE L · NIGHT SKY PRAYER ═════════════════════════ -->
+*<!-- ═══ SCENE L · NIGHT SKY PRAYER ═════════════════════════ -->*
+
     <div class="scene scene-prayer" id="prayer">
+
       <div class="stars" id="stars" aria-hidden="true"></div>
+
       <div class="moon" aria-hidden="true">🌙</div>
+
       <div class="prayer-inner">
+
         <p class="scene-kicker gold">a quiet moment</p>
+
         <h2 class="prayer-title">My Prayer For You</h2>
+
         <p class="prayer-line">May God continue to give you strength.</p>
+
         <p class="prayer-line">May He give you many more years of life.</p>
+
         <p class="prayer-line">May He give you peace for all the things you've carried.</p>
+
         <p class="prayer-line">May He reward you for the love and sacrifices you've given to your family.</p>
+
         <p class="prayer-final">And most importantly , may He allow you to see me become the person you've always wanted me to be. I want you to be there when I succeed. I want you to see that all those times you believed in me were worth it.</p>
+
       </div>
+
     </div>
 
-    <!-- ═══ SCENE M · THE LETTER (finale) ══════════════════════ -->
+*<!-- ═══ SCENE M · THE LETTER (finale) ══════════════════════ -->*
+
     <div class="scene scene-letter" id="letter">
+
       <p class="salutation">Mum,</p>
+
       <p class="letter-line">I don't think I'll ever fully understand everything you've done for me.</p>
+
       <p class="letter-line">Maybe when I was younger, I didn't see it. Maybe I took some things for granted. Maybe I didn't always make you proud.</p>
+
       <p class="letter-line">But as I grow older, I understand a little more. Every time you kept going, you were carrying something. Every sacrifice meant giving up a part of yourself. The opportunities I have today didn't simply appear. And through all my mistakes, you still chose to believe there was something good ahead of me.</p>
 
       <p class="thanks-lead">So today, I just want to say thank you.</p>
+
       <ul class="thanks-list">
+
         <li>for raising me</li>
+
         <li>for believing in me</li>
+
         <li>for supporting me</li>
+
         <li>for teaching me</li>
+
         <li>for being patient with me</li>
+
         <li>for simply being my Mum</li>
+
       </ul>
 
       <p class="letter-line">I don't know exactly where life will take me, but I know one thing. I want you to be there when I make it. I want you to see me succeed. I want you to look back one day and know that everything you did for me mattered.</p>
@@ -246,33 +435,55 @@
       <p class="letter-line">Until then, I'll keep trying to become someone you can be proud of.</p>
 
       <h2 class="final-birthday">Happy Birthday, Mum.</h2>
+
       <p class="letter-line">May God bless you with many more years, more peace, more happiness, and more beautiful moments with the people you love.</p>
+
       <p class="final-love" id="final-love">I love you, Mum.</p>
+
       <p class="signature">.... Your son</p>
 
     </div>
+
   </main>
 
   <footer class="site-footer">
+
     <p>Made with love, for Edinah · 12 September · <span class="heart">♥</span></p>
+
   </footer>
 
-  <!-- ═══ Lightbox ═══════════════════════════════════════════ -->
+*<!-- ═══ Lightbox ═══════════════════════════════════════════ -->*
+
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+
     <button class="lightbox-close" id="lightbox-close" aria-label="Close photo">&times;</button>
+
     <button class="lightbox-arrow lightbox-prev" id="lightbox-prev" aria-label="Previous photo">&#8249;</button>
+
     <figure class="lightbox-figure">
+
       <img id="lightbox-img" src="" alt="" />
+
       <figcaption id="lightbox-caption"></figcaption>
+
     </figure>
+
     <button class="lightbox-arrow lightbox-next" id="lightbox-next" aria-label="Next photo">&#8250;</button>
+
   </div>
 
-  <!-- Motion stack (order matters: gsap → plugins → script) -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
+*<!-- Motion stack (order matters: gsap → plugins → script) -->*
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" onerror="this.onerror=null;this.src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js'"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" onerror="this.onerror=null;this.src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js'"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js" onerror="this.onerror=null;this.src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js'"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+
   <script src="script.js"></script>
+
 </body>
+
 </html>
